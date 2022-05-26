@@ -1,12 +1,27 @@
 import fetch from "node-fetch";
 import express from "express";
+import db from "./src/config/dbconnect.js";
 import cors from "cors";
+import routes from "./src/routes/index.js";
 
-const apiKey = "RGAPI-d3e2662d-e5e9-4feb-9d0e-28ba43050f39";
+const apiKey = "RGAPI-75f54955-50be-47ca-8cf8-593066fe69e5";
+
+const port = process.env.PORT | 8000;
 
 const app = express();
+app.use(express.json());
 app.use(cors());
-const port = 8000;
+routes(app);
+
+
+db.on("error", console.log.bind(console, "Erro de conexão"));
+db.once("open", () => {
+    console.log("conexão com o banco feita com sucesso");
+});
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta:${port}`);
+});
 
 // Summoner Request
 app.get("/summoner/:nickname", async (req, res) => {
@@ -85,10 +100,8 @@ app.get("/rankedMatchs/:id", async (req, res) => {
   const rankedMatchs = await response.json();
   res.send(rankedMatchs);
   console.log(rankedMatchs);
-  console.timeEnd("Rankeds")
+  console.timeEnd("Rankeds");
 });
 // searchByName("osteoposose", "br1");
 
-app.listen(port, () =>
-  console.log(`Hello world app listening on port ${port}!`)
-);
+export default app;
