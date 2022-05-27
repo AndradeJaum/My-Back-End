@@ -5,6 +5,6 @@ const playersSchema = new mongoose.Schema({
   player: { type: String, required: true },
 });
 
-const players = mongoose.model("Leaderboards", playersSchema);
+const Player = mongoose.model("Leaderboards", playersSchema);
 
-export default players;
+export default Player;
