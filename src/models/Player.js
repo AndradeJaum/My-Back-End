@@ -7,6 +7,7 @@ const playersSchema = new mongoose.Schema({
   rankedFlex: { type: Object },
 });
 
+
 const Player = mongoose.model("Player", playersSchema);
 
 export default Player;

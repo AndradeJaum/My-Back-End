@@ -1,26 +1,29 @@
-import dotenv from "dotenv"
-dotenv.config()
 
 import express from "express";
 import cors from "cors";
-import db from "./src/config/dbconnect.js";
+import { loadConfig, globalConfig } from "./src/config/index.js";
+import { getDbConnection } from "./src/config/dbconnect.js";
 
 import router from "./src/routes/index.js";
 
-const port = process.env.PORT | 8000;
+loadConfig();
 
-db.on("error", console.log.bind(console, "Erro de conexão"));
-db.once("open", () => {
-  console.log("conexão com o banco feita com sucesso");
-});
+await getDbConnection()
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(router)
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta:${port}`);
-  });
+app.use((error, req, res, next) => {
+  console.log(error)
+  return res
+    .status(500)
+    .json({ status: 'error', message: 'Internal server error' });
+});
+
+app.listen(globalConfig.port, () => {
+  console.log(`Servidor rodando na porta:${globalConfig.port}`);
+});
 
 export default app;
