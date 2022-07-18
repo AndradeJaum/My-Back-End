@@ -2,8 +2,19 @@ import express from "express";
 import fetch from "node-fetch";
 import Player from "../models/Player.js";
 import MatchInfo from "../models/MatchInfo.js";
+import { globalConfig } from "../config/index.js"
 
 const router = new express.Router();
+
+const getHeaders = () => {
+  return {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Origin: "https://developer.riotgames.com/",
+      "X-Riot-Token": globalConfig.riot_apikey,
+    },
+  }
+}
 
 router.get("/summoner/:nickname", async (req, res, next) => {
   try {
@@ -13,11 +24,7 @@ router.get("/summoner/:nickname", async (req, res, next) => {
     const response = await fetch(
       `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${nickname}`,
       {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Origin: "https://developer.riotgames.com/",
-          "X-Riot-Token": process.env.API_KEY,
-        },
+        headers: getHeaders()
       }
     );
 
@@ -26,11 +33,7 @@ router.get("/summoner/:nickname", async (req, res, next) => {
     const data = await fetch(
       `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner.id}`,
       {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Origin: "https://developer.riotgames.com/",
-          "X-Riot-Token": process.env.API_KEY,
-        },
+        headers: getHeaders()
       }
     );
 
@@ -74,11 +77,7 @@ router.get("/match/:id", async (req, res, next) => {
     const response = await fetch(
       `https://americas.api.riotgames.com/lol/match/v5/matches/${id}`,
       {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Origin: "https://developer.riotgames.com/",
-          "X-Riot-Token": process.env.API_KEY,
-        },
+        headers: getHeaders()
       }
     );
     const match = await response.json();
@@ -96,11 +95,7 @@ router.get("/matchs/:id", async (req, res, next) => {
     const response = await fetch(
       `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${id}/ids?start=0&count=20`,
       {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Origin: "https://developer.riotgames.com/",
-          "X-Riot-Token": process.env.API_KEY,
-        },
+        headers: getHeaders()
       }
     );
     const matchs = await response.json();
@@ -116,11 +111,7 @@ router.get("/rankedMatchs/:id", async (req, res, next) => {
     const response = await fetch(
       `https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}`,
       {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Origin: "https://developer.riotgames.com/",
-          "X-Riot-Token": process.env.API_KEY,
-        },
+        headers: getHeaders()
       }
     );
     const rankedMatchs = await response.json();
