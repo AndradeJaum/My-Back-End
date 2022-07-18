@@ -7,13 +7,12 @@ import { globalConfig } from "../config/index.js"
 const router = new express.Router();
 
 const getHeaders = () => {
-  return {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      Origin: "https://developer.riotgames.com/",
-      "X-Riot-Token": globalConfig.riot_apikey,
-    },
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    Origin: "https://developer.riotgames.com/",
+    "X-Riot-Token": globalConfig.riotApikey,
   }
+  return headers
 }
 
 router.get("/summoner/:nickname", async (req, res, next) => {
@@ -26,6 +25,7 @@ router.get("/summoner/:nickname", async (req, res, next) => {
       {
         headers: getHeaders()
       }
+
     );
 
     const summoner = await response.json();

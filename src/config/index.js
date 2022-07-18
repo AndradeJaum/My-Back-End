@@ -4,7 +4,7 @@ import dotenvExpand from 'dotenv-expand';
 export const globalConfig = {
   dbUrl: process.env.DB_URL,
   port: 8000,
-  riot_apikey: process.env.APIKEY
+  riotApikey: process.env.APIKEY
 }
 
 export function loadConfig() {
@@ -14,5 +14,6 @@ export function loadConfig() {
   dotenvExpand.expand(env);
 
   globalConfig.dbUrl = process.env.DB_URL;
+  globalConfig.riotApikey = process.env.RIOT_APIKEY
   globalConfig.port = parseInt(process.env.PORT, 10) || 8000;
 }
