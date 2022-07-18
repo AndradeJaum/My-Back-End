@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
+import { globalConfig } from "../config/index.js"
 
-mongoose.connect("mongodb+srv://status:123@leaderboards.88oca.mongodb.net/StatusGG")
-
-let db = mongoose.connection;
-
-export default db;
+export async function getDbConnection() {
+  let connection = mongoose.connection;
+  if (!connection.db) {
+    await mongoose.connect(globalConfig.dbUrl);
+    connection = mongoose.connection;
+  }
+  return connection;
+}
