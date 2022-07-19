@@ -88,9 +88,10 @@ router.get("/match/:id", async (req, res, next) => {
         _id: match.metadata.matchId,
         matchDetail: match,
       });
+      
     }
-
     res.send(matchDb);
+    
   } catch (error) {
     next(error);
   }
