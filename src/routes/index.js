@@ -88,10 +88,8 @@ router.get("/match/:id", async (req, res, next) => {
         _id: match.metadata.matchId,
         matchDetail: match,
       });
-      
     }
     res.send(matchDb);
-    
   } catch (error) {
     next(error);
   }
@@ -134,6 +132,7 @@ router.post("/leaderboards", async (req, res, next) => {
     const data = req.body;
 
     const playerToSave = {
+      _id: data.summonerId,
       summonerName: data.summonerName,
       rankedSolo: data.solo,
       rankedFlex: data.flex,

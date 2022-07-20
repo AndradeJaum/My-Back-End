@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
 
 const playersSchema = new mongoose.Schema({
-  id: { type: String },
+  _id: { type: String },
   summonerName: { type: String, required: true },
   rankedSolo: { type: Object },
   rankedFlex: { type: Object },
+},
+{
+  _id: false
 });
 
 
