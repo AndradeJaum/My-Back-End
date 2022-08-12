@@ -74,7 +74,7 @@ router.get("/match/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
 
-    let matchDb = await MatchInfo.findOne({ id });
+    let matchDb = await MatchInfo.findById(id);
 
     if (!matchDb) {
       const response = await fetch(
