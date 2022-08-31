@@ -12,7 +12,7 @@ export function loadConfig() {
     path: process.env.ENV ? process.env.ENV : '.env',
   });
   dotenvExpand.expand(env);
-console.log(process.env)
+
   globalConfig.dbUrl = process.env.DB_URL;
   globalConfig.riotApikey = process.env.RIOT_APIKEY
   globalConfig.port = parseInt(process.env.PORT, 10) || 8000;

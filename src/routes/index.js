@@ -130,6 +130,7 @@ router.get("/rankedMatchs/:id", async (req, res, next) => {
 router.post("/leaderboards", async (req, res, next) => {
   try {
     const data = req.body;
+    console.log(data);
 
     const playerToSave = {
       _id: data.summonerId,
@@ -139,7 +140,7 @@ router.post("/leaderboards", async (req, res, next) => {
     };
 
     let summonerDb = await Player.findOneAndUpdate(
-      { summonerName: data.summonerName },
+      { _id: data.summonerId },
       { $set: { ...playerToSave } }
     );
 
