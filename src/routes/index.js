@@ -130,7 +130,6 @@ router.get("/rankedMatchs/:id", async (req, res, next) => {
 router.post("/leaderboards", async (req, res, next) => {
   try {
     const data = req.body;
-    console.log(data);
 
     const playerToSave = {
       _id: data.summonerId,
@@ -149,6 +148,17 @@ router.post("/leaderboards", async (req, res, next) => {
       await player.save();
     }
     res.status(201).send();
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/wallet", async (req, res, next) => {
+  try {
+    const data = req.body;
+    console.log(data);
+
+    res.send();
   } catch (error) {
     next(error);
   }
