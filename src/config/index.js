@@ -6,6 +6,8 @@ export const globalConfig = {
   port: 8000,
   riotApikey: "",
   tokenWallet: "",
+  cryptumApikey: "",
+  mnemonic: "",
 };
 
 export function loadConfig() {
@@ -18,4 +20,6 @@ export function loadConfig() {
   globalConfig.riotApikey = process.env.RIOT_APIKEY;
   globalConfig.port = parseInt(process.env.PORT, 10) || 8000;
   globalConfig.tokenWallet = process.env.TOKEN;
+  globalConfig.cryptumApikey = process.env.CRYPTUM_APIKEY;
+  globalConfig.mnemonic = process.env.MNEMONIC;
 }

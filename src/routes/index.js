@@ -19,7 +19,7 @@ const getHeaders = () => {
 };
 
 router
-  .post("/wallet", MintTokenController.mintarToken)
+  .post("/mintToken", MintTokenController.mintarToken)
   .get("/summoner/:nickname", SummonerController.summoner)
   .get("/match/:id", MatchController.match)
   .get("/matchs/:id", MatchsController.matchs)
