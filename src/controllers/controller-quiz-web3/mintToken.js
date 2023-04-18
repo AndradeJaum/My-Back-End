@@ -1,19 +1,22 @@
 import CryptumSDK from "cryptum-sdk";
+import { validateEthAddress } from "cryptum-sdk/dist/src/services/validations/index.js";
 import { globalConfig } from "../../config/index.js";
 
 const sdk = new CryptumSDK({
   environment: "testnet",
   apiKey: globalConfig.cryptumApikey,
 });
-const mnemonic = globalConfig.mnemonic
+const mnemonic = globalConfig.mnemonic;
 
-const wallet = await sdk.wallet.generateWallet({ mnemonic , protocol: "CELO" });
+const wallet = await sdk.wallet.generateWallet({ mnemonic, protocol: "CELO" });
 
 class MintTokenController {
   static mintarToken = async (req, res, next) => {
     try {
       const data = req.body;
-      console.log(data);
+      console.log(data.address)
+
+      validateEthAddress(data.address);
 
       const { hash } = await sdk.token.mint({
         wallet,

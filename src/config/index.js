@@ -6,7 +6,7 @@ export const globalConfig = {
   port: 8000,
   riotApikey: "",
   tokenWallet: "",
-  cryptumApikey: "",
+  cryptumApikey: "niAcYQ2gLni0dZzt6yRd30MmJGVfjZGz",
   mnemonic: "",
 };
 
