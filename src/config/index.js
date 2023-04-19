@@ -1,13 +1,18 @@
 import dotenv from "dotenv";
 import dotenvExpand from "dotenv-expand";
 
+const env = dotenv.config({
+  path: process.env.ENV ? process.env.ENV : ".env",
+});
+dotenvExpand.expand(env);
+
 export const globalConfig = {
   dbUrl: "",
   port: 8000,
   riotApikey: "",
-  tokenWallet: "",
-  cryptumApikey: "niAcYQ2gLni0dZzt6yRd30MmJGVfjZGz",
-  mnemonic: "",
+  tokenWallet: process.env.TOKEN,
+  cryptumApikey: process.env.CRYPTUM_APIKEY,
+  mnemonic: process.env.MNEMONIC,
 };
 
 export function loadConfig() {
