@@ -7,9 +7,10 @@ const env = dotenv.config({
 dotenvExpand.expand(env);
 
 export const globalConfig = {
-  dbUrl: "",
+  dbUrl: process.env.DB_URL,
   port: 8000,
-  riotApikey: "",
+  riotApikey: process.env,
+  RIOT_APIKEY,
   tokenWallet: process.env.TOKEN,
   cryptumApikey: process.env.CRYPTUM_APIKEY,
   mnemonic: process.env.MNEMONIC,

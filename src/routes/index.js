@@ -20,9 +20,9 @@ const getHeaders = () => {
 
 router
   .post("/mintToken", MintTokenController.mintarToken)
-  .get("/summoner/:nickname", SummonerController.summoner)
   .get("/match/:id", MatchController.match)
   .get("/matchs/:id", MatchsController.matchs)
+  .get("/summoner/:nickname", SummonerController.summoner)
   .get("/rankedMatchs/:id", RankedMatchesController.rankedMatches)
   .post("/leaderboards", leaderboardsController.postLeaderboards)
   .get("/leaderboards", leaderboardsController.getLeaderboards);
